@@ -4,6 +4,8 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
@@ -13,6 +15,8 @@ import java.util.concurrent.TimeUnit;
 public class C02_HesapMakinesi {
 
     //adb shell  settings get secure android_id: CMD ye yazınca cihazın kimligini bulmaya yarar
+
+    //8 ile 7 yi çarpıp sonucunu konsola yazdıralım
     @Test
     public void calcTest() throws MalformedURLException {
         DesiredCapabilities desiredCapabilities=new DesiredCapabilities();
@@ -25,6 +29,20 @@ public class C02_HesapMakinesi {
         AndroidDriver<AndroidElement> driver=new AndroidDriver<>(new URL("http:127.0.0.1:4723/wd/hub"),desiredCapabilities);
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
+        driver.findElement(By.xpath("//*[@text=\"8\"]")).click();
+        driver.findElement(By.xpath("//*[@text=\"7\"]")).click();
+
+        driver.findElement(By.xpath("//*[@text=\"×\"]")).click();
+
+        driver.findElement(By.xpath("//*[@text=\"3\"]")).click();
+        driver.findElement(By.xpath("//*[@text=\"2\"]")).click();
+
+
+        driver.findElement(By.xpath("//*[@text=\"=\"]")).click();
+
+        WebElement result=driver.findElement(By.id("com.android.calculator2:id/result"));
+
+        System.out.println("result.getText() = " + result.getText());
 
 
     }
